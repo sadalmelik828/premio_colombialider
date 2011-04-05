@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block titulo%}PREMIO A LOS MEJORES ALCALDES Y GOBERNADORES 2008 - 2011{% endblock %}
+
+{% block head %}
+<script type="text/javascript">
+    $(document).ready( function() {
+        $(".inscripcion").button({icons: {primary: 'ui-icon-person'}, text: true});
+        $(".acceso").button({icons: {primary: 'ui-icon-key'}, text: true});
+        $(".bases").button({icons: {primary: 'ui-icon-document'}, text: true});
+        var msg = $(".msg").text();
+        if(msg != '') {
+          $(".msg").css('display', 'inline');
+          setTimeout("$('.msg').fadeOut('slow');", 10000);
+        }
+    });
+</script>
+{% endblock %}
+
+{% block cuerpo %}
+<div class="msg">{{ msg }}</div>
+<p align="center" style="color: red; font-size: 20px;">
+    Gobernantes modernos: <b>el reto de crecer pensando en todos</b>
+</p>
+<div align="center" id="logo">
+    <img src="/multimedia/imagenes/logo_premio.png" />
+</div>
+<p align="center" style="color: red; font-size: 20px;">
+    <b>Nueva categor&iacute;a:</b> Alcalde y gobernador incluyente.
+</p>
+<!--<p align="justify">Para la categor&iacute;a general Colombia Lider evaluar&aacute; a todos los alcaldes y gobernadores, sin que deban postularse, y exaltar&aacute; los resultados de los gobernantes locales que se hayan distinguido por su gesti&oacute;n integral, replicabilidad, innovaci&oacute;n, sistenibilidad, participaci&oacute;n ciudadana e inclusi&oacute;n social.</p>-->
+<p align="center" style="font-weight: bold; font-size: 18px;">
+    Hasta el 30 de junio de 2011.
+</p>
+<p align="center" style="color: red; font-size: 15px; font-weight: bold;">
+    Mayores informes: Karem Labrador, Coordinadora General de Colombia L&iacute;der - Celular 301 700 7459
+    <br>premio@colombialider.org - inclusion@colombialider.org
+    <br>www.colombialider.org - www.saldarriagaconcha.org
+</p>
+<div align="center" style="padding-top: 30px;">
+    <a class="inscripcion" href="/inscripcion">Inscripci&oacute;n</a> 
+    <a class="acceso" href="/acceso">Inicio de sesi&oacute;n</a>
+    <p align="center">
+      <a class="bases" href="/multimedia/documentos/bases_alcaldes_y_gobernantes_incluyentes.pdf">Bases del premio</a>
+    </p>
+</div>
+<br>
+{% endblock %}

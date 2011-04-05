@@ -1,0 +1,610 @@
+{% extends "base.html" %}
+
+{% block titulo %}Postulaci&oacute;n{% endblock %}
+
+{% block head %}
+<script type="text/javascript" src="/multimedia/js/jquery.MultiFile.pack.js">
+</script>
+<script type="text/javascript" src="/multimedia/js/postulacion.js">
+</script>
+<script type="text/javascript">
+    $(document).ready( function() {
+      $("#acordeon").accordion({ collapsible: true });
+        $("#tabs_categorias, #tabs_resultados").tabs();
+        $(".pass").button({ icons: { primary: 'ui-icon-key' }, text: true });
+        $(".salir").button({ icons: { primary: 'ui-icon-power' }, text: true });
+        $('input:file').MultiFile({
+            accept: 'pdf', max: 1, STRING: {
+                //remove:'Quitar',
+                remove:'<img src="/multimedia/imagenes/error.png" height="16" width="16" alt="Quitar" border="0" title="quitar" /> ',
+                denied:'Usted no puede subir un archivo de tipo $ext.\nRecuerde que el archivo debe estar en formato PDF.',
+                selected:'Ha seleccionado: $file'
+            }
+        });
+        var msg = $(".msg").text();
+        if(msg != '') {
+          $(".msg").css('display', 'inline');
+          setTimeout("$('.msg').fadeOut('slow');", 10000);
+        }
+    });
+</script>
+{% endblock %}
+
+{% block cuerpo %}
+<div class="msg">{{ msg }}</div>
+<h1>Postulaci&oacute;n</h1>
+<div align="right">
+    <a class="pass" href="/cambio_pass/">Cambiar contrase&ntilde;a</a> | <a class="salir" href="/salir/">Salir</a>
+</div>
+<!--<h3>Bases de los criterios de evaluaci&oacute;n</h3>-->
+<div id="bases">
+  <div id="acordeon" style="display: none;">
+    <h3><a href="#">Inclusi&oacute;n Social</a></h3>
+    <div>
+      <p>
+        Las experiencias no deben generar servicios paralelos o segregados de los que se ofrecen al resto de la comunidad sino por el contrario, realizar los ajustes razonables para asegurar que las personas con discapacidad puedan participar en igualdad de condiciones.
+      </p>
+    </div>
+    <h3><a href="#">Intersectorialidad</a></h3>
+    <div>
+      <p>
+        Experiencias incluyentes que resulten del esfuerzo de articular diferentes áreas de una misma institución, o de varias instituciones, y que cuenten con enfoques interdisciplinarios.
+      </p>
+    </div>
+    <h3><a href="#">Replicabilidad</a></h3>
+    <div>
+      <p>
+        Experiencias incluyentes que puedan escalarse localmente, y/o que puedan ser adoptadas por otros municipios y departamentos del país.
+      </p>
+    </div>
+    <h3><a href="#">Innovaci&oacute;n</a></h3>
+    <div>
+      <p>
+        Experiencias incluyentes que ofrezcan nuevos o mejores enfoques, herramientas, técnicas y procedimientos de gestión de programas, bienes y servicios.
+      </p>
+    </div>
+    <h3><a href="#">Generaci&oacute;n de alianzas y redes</a></h3>
+    <div>
+      <p>
+        Experiencias incluyentes que hayan generado alianzas público privadas y redes sociales sostenibles.
+      </p>
+    </div>
+    <h3><a href="#">Participaci&oacute;n comunitaria</a></h3>
+    <div>
+      <p>
+        Experiencias en las cuales en la planeación, organización y ejecución de las acciones se haya involucrado efectivamente a la comunidad y a otras organizaciones de la sociedad civil.
+      </p>
+    </div>
+    <h3><a href="#">Efectividad</a></h3>
+    <div>
+      <p>
+        Experiencias incluyentes en las cuales el municipio o departamento, bajo el liderazgo del alcalde o gobernador se hayan fijado y logrado metas específicas para alcanzar procesos de inclusión, y se tengan resultados con indicadores verificables.
+      </p>
+    </div>
+    <h3><a href="#">Gesti&oacute;n Integral</a></h3>
+    <div>
+      <p>
+        Experiencias incluyentes en las cuales se destaquen ejercicios de planeación, formulación, implementación, seguimiento y evaluación, que generen una buena gestión con eficiencia administrativa y que reflejen un compromiso institucional.
+      </p>
+    </div>
+  </div>
+</div>
+<h2>Datos del Postulado</h2>
+<div id="inscrito">    
+    <table class="tabla" border="0" cellspacing="0" cellpadding="0" >
+        <tr>
+            <th></th>
+            <th><p>Gobernante</p></th>
+            <th>Contacto</th>
+        </tr>
+        <tr>
+            <th>Nombre</th>
+            <td>{{ inscrito.nombre|linebreaks }}</td>
+            <td>{{ inscrito.nombre_contacto }}</td>
+        </tr>
+        <tr>
+            <th>Cargo</th>            
+            <td>
+            {{ inscrito.tipo_gobernante.nombre }} de
+            {% if inscrito.tipo_gobernante.id == 1 %}
+            {{ inscrito.municipio.departamento.nombre }}
+            {% else %}
+            {{ inscrito.municipio.nombre }} ({{ inscrito.municipio.departamento.nombre }})
+            {% endif %}
+            </td>
+            <td>{{ inscrito.cargo_contacto|linebreaks }}</td>
+        </tr>
+        <tr>
+            <th>N&uacute;mero de tel&eacute;fono fijo</th>
+            <td>{{ inscrito.tel_fijo|linebreaks }}</td>
+            <td>{{ inscrito.tel_fijo_contacto }}</td>
+        </tr>
+        <tr>
+            <th>N&uacute;mero de tel&eacute;fono celular</th>
+            <td>{{ inscrito.celular|linebreaks }}</td>
+            <td>{{ inscrito.celular_contacto }}</td>
+        </tr>
+        <tr>
+            <th>Correo electr&oacute;nico</th>
+            <td>{{ inscrito.correo|linebreaks }}</td>
+            <td>{{ inscrito.correo_contacto }}</td>
+        </tr>
+    </table>
+</div>
+<h2>Criterios de evaluaci&oacute;n y selecci&oacute;n</h2>
+<div id="error">
+{% if requisitos.errors %}
+<p style="color: red;">
+    Corrija error{{ requisitos.errors|pluralize:"es" }} en la secci&oacute;n de Requisitos.
+</p>
+{% endif %}
+{% if educacion.errors %}
+<p style="color: red;">
+    Corrija error{{ educacion.errors|pluralize:"es" }} en la secci&oacute;n de Resultados - Educaci&oacute;n.
+</p>
+{% endif %}
+{% if mercado.errors %}
+<p style="color: red;">
+    Corrija error{{ mercado.errors|pluralize:"es" }} en la secci&oacute;n de Resultados - Mercado laboral y productividad.
+</p>
+{% endif %}
+{% if accesibilidad.errors %}
+<p style="color: red;">
+    Corrija error{{ accesibilidad.errors|pluralize:"es" }} en la secci&oacute;n de Resultados - Accesibilidad.
+</p>
+{% endif %}
+{% if acceso.errors %}
+<p style="color: red;">
+    Corrija error{{ acceso.errors|pluralize:"es" }} en la secci&oacute;n de Resultados - Acceso a la informaci&oacure;n.
+</p>
+{% endif %}
+{% if convivencia.errors %}
+<p style="color: red;">
+    Corrija error{{ convivencia.errors|pluralize:"es" }} en la secci&oacute;n de Resultados - Convivencia y derechos humanos.
+</p>
+{% endif %}
+{% if cultura.errors %}
+<p style="color: red;">
+    Corrija error{{ cultura.errors|pluralize:"es" }} en la secci&oacute;n de Resultados - Cultura, recreaci&oacute;n y deporte.
+</p>
+{% endif %}
+{% if registro.errors %}
+<p style="color: red;">
+    Corrija error{{ registro.errors|pluralize:"es" }} en la secci&oacute;n de Resultados - Registro de localizaci&oacute;n.
+</p>
+{% endif %}
+{% if sectores.errors %}
+<p style="color: red;">
+    Corrija error{{ sectores.errors|pluralize:"es" }} en la secci&oacute;n de Resultados - Otros sectores.
+</p>
+{% endif %}
+{% if gestion.errors %}
+<p style="color: red;">
+    Corrija error{{ gestion.errors|pluralize:"es" }} en la secci&oacute;n de Gesti&oacute;n integral.
+</p>
+{% endif %}
+{% if replicabilidad.errors %}
+<p style="color: red;">
+    Corrija error{{ replicabilidad.errors|pluralize:"es" }} en la secci&oacute;n de Replicabilidad.
+</p>
+{% endif %}
+{% if innovacion.errors %}
+<p style="color: red;">
+    Corrija error{{ innovacion.errors|pluralize:"es" }} en la secci&oacute;n de Innovaci&oacute;n.
+</p>
+{% endif %}
+{% if participacion.errors %}
+<p style="color: red;">
+    Corrija error{{ participacion.errors|pluralize:"es" }} en la secci&oacute;n de Participaci&oacute;n.
+</p>
+{% endif %}
+</div>
+<div id="tabs_categorias">
+    <form action="" method="post" name="postulacion" id="id_postulacion" enctype="multipart/form-data" >
+        <ul>
+            <li>
+                <a href="#requisitos">Requisitos</a>
+            </li>
+            <li>
+                <a href="#resultados">Resultados - 650</a>
+            </li>
+            <li>
+                <a href="#gestion_integral">Gesti&oacute;n Integral - 100</a>
+            </li>
+            <li>
+                <a href="#replicabilidad">Replicabilidad - 50</a>
+            </li>
+            <li>
+                <a href="#innovacion">Innovaci&oacute;n - 100</a>
+            </li>
+            <li>
+                <a href="#participacion">participaci&oacute;n - 100</a>
+            </li>
+            <li>
+                <a href="#extras">Datos Adicionales</a>
+            </li>
+        </ul>
+        <div id="requisitos">
+            <h4>Requisitos M&iacute;nimos</h4>
+            <i>Para participar, usted deberá cumplir con los siguientes requisitos, anexando los respectivos soportes y evidencias:</i>
+            {{ requisitos.management_form }}
+            {% for f in requisitos.forms %}
+            <p>
+                {{ f.id }}
+                {{ f.postulacion }}
+                <p id="preguntas">{% cycle req.0.nombre req.1.nombre %}</p>
+                <br>
+                {{ f.respuesta }}
+                <br>                
+                <p>{{ f.anexo }}</p>
+                <i>&bull; {{ f.anexo.help_text }} (Obligatorio estar anexado al momento de cerrar la postulaci&oacute;n).</i>
+                {{ f.anexo.errors }}
+                <br>
+            </p>
+            <hr>
+            {% endfor %}
+        </div>
+        <div id="resultados">
+            <div id="tabs_resultados">
+                <ul>
+                    <li>
+                        <a href="#educacion">Educaci&oacute;n - 150</a>
+                    </li>
+                    <li>
+                        <a href="#mercado">Mercado laboral y productividad - 150</a>
+                    </li>
+                    <li>
+                        <a href="#accesibilidad">Accesibilidad - 100</a>
+                    </li>
+                    <li>
+                        <a href="#acceso">Acceso a la informaci&oacute;n - 50</a>
+                    </li>
+                    <li>
+                        <a href="#convivencia">Convivencia y derechos humanos - 50</a>
+                    </li>
+                    <li>
+                        <a href="#cultura">Cultura, recreaci&oacute;n y deporte - 50</a>
+                    </li>
+                    <li>
+                        <a href="#registro">Registro de localizaci&oacute;n - 50</a>
+                    </li>
+                    <li>
+                        <a href="#sectores">Otros Sectores - 50</a>
+                    </li>
+                </ul>
+                <div id="educacion">
+                    <h4>Resultados - Educaci&oacute;n</h4>
+                    {{ educacion.management_form }}
+                    {% for e in educacion.forms %}
+                    <p>
+                        {{ e.id }}
+                        {{ e.postulacion }}
+                        <p id="preguntas">{% cycle edu.0 edu.1 edu.2 edu.3 edu.4 edu.5 edu.6 edu.7 %}</p>
+                        {{ e.respuesta }}
+                        <br>
+                        <p>{{ e.anexo }}</p>
+                        {% if forloop.counter == 7 or forloop.counter == 1 %}
+                          <i>&bull; Anexe el respectivo soporte en formato PDF. (Obligatorio estar anexado al momento de cerrar la postulaci&oacute;n).</i>
+                        {% else %}
+                          <i>&bull; {{ e.anexo.help_text }}</i>
+                        {% endif %}
+                        {{ e.anexo.errors }}
+                        <br>
+                    </p>
+                    <hr>
+                    {% endfor %}
+                    <h4>Criterios de Evaluaci&oacute;n</h4>
+                    {{ fcee.management_form }}
+                    {% for fcee in fcee.forms %}
+                    <p>
+                        {{ fcee.id }}
+                        {{ fcee.postulacion_subcategoria_categoria }}
+                        <p id="preguntas">{% cycle "Punto de partida" "Metas" "Avances" %}</p>
+                        <br>
+                        {{ fcee.respuesta }}
+                    </p>
+                    {% endfor %}
+                </div>
+                <div id="mercado">
+                    <h4>Resultados - Mercado laboral y productividad</h4>
+                    {{ mercado.management_form }}
+                    {% for m in mercado.forms %}
+                    <p>
+                        {{ m.id }}
+                        {{ m.postulacion }}
+                        <p id="preguntas">{% cycle mer.0 mer.1 mer.2 mer.3 mer.4 mer.5 mer.6 mer.7 %}</p>
+                        {{ m.respuesta }}
+                        <br>
+                        <p>{{ m.anexo }}</p>
+                        {% if forloop.counter != 5 %}
+                          <i>&bull; {{ m.anexo.help_text }}</i>
+                        {% else %}
+                          <i>&bull; Anexe el respectivo soporte en formato PDF. (Obligatorio estar anexado al momento de cerrar la postulaci&oacute;n).</i>
+                        {% endif %}
+                        {{ m.anexo.errors }}
+                        <br>
+                    </p>
+                    <hr>
+                    {% endfor %}
+                    <h4>Criterios de Evaluaci&oacute;n</h4>
+                    {{ fcem.management_form }}
+                    {% for fcem in fcem.forms %}
+                    <p>
+                        {{ fcem.id }}
+                        {{ fcem.postulacion_subcategoria_categoria }}
+                        <p id="preguntas">{% cycle "Punto de partida" "Metas" "Avances" %}</p>
+                        <br>
+                        {{ fcem.respuesta }}
+                    </p>
+                    {% endfor %}
+                </div>
+                <div id="accesibilidad">
+                    <h4>Resultados - Accesibilidad</h4>
+                    {{ accesibilidad.management_form }}
+                    {% for a in accesibilidad.forms %}
+                    <p>
+                        {{ a.id }}
+                        {{ a.postulacion }}
+                        <p id="preguntas">{% cycle acc.0 acc.1 acc.2 acc.3 acc.4 acc.5 acc.6 acc.7 %}</p>
+                        {{ a.respuesta }}
+                        <br>
+                        <p>{{ a.anexo }}</p>
+                        {% if forloop.counter == 5 %}
+                          <i>&bull; Anexe el respectivo soporte en formato PDF. (Obligatorio estar anexado al momento de cerrar la postulaci&oacute;n).</i>
+                        {% else %}
+                          <i>&bull; {{ a.anexo.help_text }}</i>
+                        {% endif %}
+                        {{ a.anexo.errors }}
+                        <br>
+                    </p>
+                    <hr>
+                    {% endfor %}
+                    <h4>Criterios de Evaluaci&oacute;n</h4>
+                    {{ fcea.management_form }}
+                    {% for fcea in fcea.forms %}
+                    <p>
+                        {{ fcea.id }}
+                        {{ fcea.postulacion_subcategoria_categoria }}
+                        <p id="preguntas">{% cycle "Punto de partida" "Metas" "Avances" %}</p>
+                        <br>
+                        {{ fcea.respuesta }}
+                    </p>
+                    {% endfor %}
+                </div>
+                <div id="acceso">
+                    <h4>Resultados - Acceso a la informaci&oacute;n</h4>
+                    {{ acceso.management_form }}
+                    {% for c in acceso.forms %}
+                    <p>
+                        {{ c.id }}
+                        {{ c.postulacion }}
+                        <p id="preguntas">{% cycle ac.0 ac.1 ac.2 ac.3 ac.4 ac.5 ac.6 ac.7 %}</p>
+                        {{ c.respuesta }}
+                        <br>
+                        <p>{{ c.anexo }}</p>
+                        <i>&bull; {{ c.anexo.help_text }}</i>
+                        {{ c.anexo.errors }}
+                        <br>
+                    </p>
+                    <hr>
+                    {% endfor %}
+                    <h4>Criterios de Evaluaci&oacute;n</h4>
+                    {{ fcei.management_form }}
+                    {% for fcei in fcei.forms %}
+                    <p>
+                        {{ fcei.id }}
+                        {{ fcei.postulacion_subcategoria_categoria }}
+                        <p id="preguntas">{% cycle "Punto de partida" "Metas" "Avances" %}</p>
+                        <br>
+                        {{ fcei.respuesta }}
+                    </p>
+                    {% endfor %}
+                </div>
+                <div id="convivencia">
+                    <h4>Resultados - Convivencia y derechos humanos</h4>
+                    {{ convivencia.management_form }}
+                    {% for h in convivencia.forms %}
+                    <p>
+                        {{ h.id }}
+                        {{ h.postulacion }}
+                        <p id="preguntas">{% cycle hum.0 hum.1 hum.2 hum.3 hum.4 hum.5 hum.6 hum.7 %}</p>
+                        {{ h.respuesta }}
+                        <br>
+                        <p>{{ h.anexo }}</p>
+                        <i>&bull; {{ h.anexo.help_text }}</i>
+                        {{ h.anexo.errors }}
+                        <br>
+                    </p>
+                    <hr>
+                    {% endfor %}
+                    <h4>Criterios de Evaluaci&oacute;n</h4>
+                    {{ fcec.management_form }}
+                    {% for fcec in fcec.forms %}
+                    <p>
+                        {{ fcec.id }}
+                        {{ fcec.postulacion_subcategoria_categoria }}
+                        <p id="preguntas">{% cycle "Punto de partida" "Metas" "Avances" %}</p>
+                        <br>
+                        {{ fcec.respuesta }}
+                    </p>
+                    {% endfor %}
+                </div>
+                <div id="cultura">
+                    <h4>Resultados - Cultura, recreaci&oacute;n y deporte</h4>
+                    {{ cultura.management_form }}
+                    {% for r in cultura.forms %}
+                    <p>
+                        {{ r.id }}
+                        {{ r.postulacion }}
+                        <p id="preguntas">{% cycle cul.0 cul.1 cul.2 cul.3 cul.4 cul.5 cul.6 cul.7 %}</p>
+                        {{ r.respuesta }}
+                        <br>
+                        <p>{{ r.anexo }}</p>
+                        {% if forloop.counter == 1 %}
+                          <i>&bull; {{ r.anexo.help_text }}</i>
+                        {% else %}
+                          <i>&bull; Anexe el respectivo soporte en formato PDF. (Obligatorio estar anexado al momento de cerrar la postulaci&oacute;n).</i>
+                        {% endif %}
+                        {{ r.anexo.errors }}
+                        <br>
+                    </p>
+                    <hr>
+                    {% endfor %}
+                    <h4>Criterios de Evaluaci&oacute;n</h4>
+                    {{ fced.management_form }}
+                    {% for fced in fced.forms %}
+                    <p>
+                        {{ fced.id }}
+                        {{ fced.postulacion_subcategoria_categoria }}
+                        <p id="preguntas">{% cycle "Punto de partida" "Metas" "Avances" %}</p>
+                        <br>
+                        {{ fced.respuesta }}
+                    </p>
+                    {% endfor %}
+                </div>
+                <div id="registro">
+                    <h4>Resultados - Registro de localizaci&oacute;n y caracterizaci&oacute;n de personas con discapacidad</h4>
+                    {{ registro.management_form }}
+                    {% for l in registro.forms %}
+                    <p>
+                        {{ l.id }}
+                        {{ l.postulacion }}
+                        <p id="preguntas">{% cycle loc.0 loc.1 loc.2 loc.3 loc.4 loc.5 loc.6 loc.7 %}</p>
+                        {{ l.respuesta }}
+                        <br>
+                        <p>{{ l.anexo }}</p>
+                        <i>&bull; {{ l.anexo.help_text }}</i>
+                        {{ l.anexo.errors }}
+                        <br>
+                    </p>
+                    <hr>
+                    {% endfor %}
+                    <h4>Criterios de Evaluaci&oacute;n</h4>
+                    {{ fcel.management_form }}
+                    {% for fcel in fcel.forms %}
+                    <p>
+                        {{ fcel.id }}
+                        {{ fcel.postulacion_subcategoria_categoria }}
+                        <p id="preguntas">{% cycle "Punto de partida" "Metas" "Avances" %}</p>
+                        <br>
+                        {{ fcel.respuesta }}
+                    </p>
+                    {% endfor %}
+                </div>
+                <div id="sectores">
+                    <h4>Resultados - Otros sectores</h4>
+                    {{ sectores.management_form }}
+                    {% for s in sectores.forms %}
+                    <p>
+                        {{ s.id }}
+                        {{ s.postulacion }}
+                        <p id="preguntas">{% cycle sec.0 sec.1 sec.2 sec.3 sec.4 sec.5 sec.6 sec.7 %}</p>
+                        {{ s.respuesta }}
+                        <br>
+                        <p>{{ s.anexo }}</p>
+                        {% if forloop.counter != 3 %}
+                          <i>&bull; {{ s.anexo.help_text }}</i>
+                        {% else %}
+                          <i>&bull; Anexe el respectivo soporte en formato PDF. (Obligatorio estar anexado al momento de cerrar la postulaci&oacute;n).</i>
+                        {% endif %}
+                        {{ s.anexo.errors }}
+                        <br>
+                    </p>
+                    <hr>
+                    {% endfor %}
+                    <h4>Criterios de Evaluaci&oacute;n</h4>
+                    {{ fces.management_form }}
+                    {% for fces in fces.forms %}
+                    <p>
+                        {{ fces.id }}
+                        {{ fces.postulacion_subcategoria_categoria }}
+                        <p id="preguntas">{% cycle "Punto de partida" "Metas" "Avances" %}</p>
+                        <br>
+                        {{ fces.respuesta }}
+                    </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div id="gestion_integral">
+            <h4>Gesti&oacute;n Integral</h4>
+            {{ gestion.management_form }}
+            {% for g in gestion.forms %}
+            <p>
+                {{ g.id }}
+                {{ g.postulacion }}
+                <p id="preguntas">{% cycle ges.0 ges.1 ges.2 ges.3 ges.4 ges.5 ges.6 ges.7 ges.8 ges.9 ges.10 %}</p>
+                {{ g.respuesta }}
+                <br>
+                {% if forloop.counter0 == 0 %}
+                <p>{{ g.anexo }}</p>
+                <i>&bull; Anexe el respectivo soporte en formato PDF. (Obligatorio estar anexado al momento de cerrar la postulaci&oacute;n).</i>
+                {{ g.anexo.errors }}
+                {% endif %}
+                <br>
+            </p>
+            <hr>
+            {% endfor %}
+        </div>
+        <div id="replicabilidad">
+            <h4>Replicabilidad</h4>
+            {{ replicabilidad.management_form }}
+            {% for d in replicabilidad.forms %}
+            <p>
+                {{ d.id }}
+                {{ d.postulacion }}
+                <p id="preguntas">{% cycle rep.0 rep.1 rep.2 rep.3 rep.4 rep.5 rep.6 rep.7 %}</p>
+                {{ d.respuesta }}
+                <br>
+                <p>{{ d.anexo }}</p>
+                <i>&bull; {{ d.anexo.help_text }}</i>
+                {{ d.anexo.errors }}
+                <br>
+            </p>
+            <hr>
+            {% endfor %}
+        </div>
+        <div id="innovacion">
+            <h4>Innovaci&oacute;n</h4>
+            {{ innovacion.management_form }}
+            {% for n in innovacion.forms %}
+            <p>
+                {{ n.id }}
+                {{ n.postulacion }}
+                <p id="preguntas">{% cycle inn.0 inn.1 inn.2 inn.3 inn.4 inn.5 inn.6 inn.7 %}</p>
+                {{ n.respuesta }}
+                <br>
+                <p>{{ n.anexo }}</p>
+                <i>&bull; {{ n.anexo.help_text }}</i>
+                {{ n.anexo.errors }}
+                <br>
+            </p>
+            <hr>
+            {% endfor %}            
+        </div>
+        <div id="participacion">
+            <h4>Participaci&oacute;n</h4>
+            {{ participacion.management_form }}
+            {% for t in participacion.forms %}
+            <p>
+                {{ t.id }}
+                {{ t.postulacion }}
+                <p id="preguntas">{% cycle part.0 part.1 part.2 part.3 part.4 part.5 part.6 part.7 %}</p>
+                {{ t.respuesta }}
+                <br>
+                <p>{{ t.anexo }}</p>
+                <i>&bull; {{ t.anexo.help_text }}</i>
+                {{ t.anexo.errors }}
+                <br>
+            </p>
+            <hr>
+            {% endfor %}
+        </div>
+        <div id="extras">            
+            {{ postulacion.as_p }}
+            <p style="display: none; color: red; text-align: justify;">Recuerde que si guarda la postulación como cerrada, debe haber diligenciado todos los campos de texto y haber anexado algunos soportes que se indican como obligatorios de todas las pestañas, a excepción de <b>Datos Adicionales</b>. Una vez cerrada la postulación, usted no podr&aacute; volver a editarla y el resumen de su diligenciamiento, ser&aacute; enviado en formato PDF al correo que indico en el momento de la inscripci&oacute;n.<br>Si usted no cierra la postulaci&oacute;n antes del 30 de Junio del 2011, El sistema automaticamente se la cerrar&aacute;, a&uacute;n si no ha completado toda la informaci&oacute;n.</p>
+        </div>
+        <input type="submit" value="Guardar" />
+    </form>
+</div>
+{% endblock %}

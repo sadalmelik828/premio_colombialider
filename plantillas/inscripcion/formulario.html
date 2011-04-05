@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block titulo %}Formulario de Postulaci&oacute;n{% endblock %}
+
+{%block head%}
+<script type="text/javascript" src="/multimedia/js/jquery.MultiFile.pack.js">
+</script>
+<script type="text/javascript" src="/multimedia/js/municipios.js">
+</script>
+{%endblock%}
+
+{% block cuerpo %}
+<div align="center" id="logo">
+    <img src="/multimedia/imagenes/logo_premio_2.png" />
+</div>
+<h2>Formato de Inscripci&oacute;n</h2>
+<p align="Justify">Antes de diligenciar este perfil lea los t&eacute;rminos de la convocatoria que encontrar&aacute; anexa en la portada de la aplicaci&oacute;n. Para obtener mayor informaci&oacute;n env&iacute;e un correo electr&oacute;nico a la direcci&oacute;n inclusion@colombialider.org.</p>
+{% if formulario.errors %}
+<p style="color: red;">
+    Corrija error{{ formulario.errors|pluralize:"es" }} abajo.
+</p>
+{% endif %}
+<script type="text/javascript" language="javascript">
+    $( function() {
+        $('#id_carta_postulacion').MultiFile({
+            accept: 'pdf', max: 1, STRING: {
+                //remove:'Quitar',
+                remove:'<img src="/multimedia/imagenes/error.png" height="16" width="16" alt="Quitar" border="0" title="quitar" /> ',
+                denied:'Usted no puede subir un archivo de tipo $ext.\nRecuerde que el archivo debe ser pdf.',
+                selected:'Ha seleccionado: $file'
+            }
+        });
+    });
+</script>
+<form action="" method="post" name="inscripcion" id="inscripcion" enctype="multipart/form-data" >
+    <table border="0" cellspacing="0" cellpadding="0">
+        {{formulario.as_table}}
+    </table>
+    <input type="submit" value="Enviar"/>
+</form>
+{% endblock %}

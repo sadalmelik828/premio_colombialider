@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block titulo %}Inicio de sesi&oacute;n{% endblock %}
+
+{% block cuerpo %}
+    <h2>Inicio de Sesi&oacute;n</h2>
+    <p align="center">Ingrese el nombre de usuario y contrase&ntilde;a que fueron enviados a su correo electr&oacute;nico al inscribirse.</p>
+    <p align="center" style="color: red;">{{msg}}</p>
+    <form action="" method="post">
+        <div align="center">
+            <b>Usuario</b><br/>
+            <input type="text" name="usuario" id="usuario" />
+        </div>
+        <div align="center">
+            <b>Contrase&ntilde;a</b><br/>
+            <input type="password" name="password" id="password" />
+        </div>
+        <div align="center">
+        <input type="submit" value="Ingresar" />
+        </div>
+    </form>
+{% endblock %}

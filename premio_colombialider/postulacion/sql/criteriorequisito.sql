@@ -1,0 +1,2 @@
+INSERT INTO `criterio_requisito` (`id`, `nombre`) VALUES (1, 'Llevar el Registro de Localización y caracterización de personas con discapacidad. Por favor indicar ¿cuál es el grado de avance en su actualización?');
+INSERT INTO `criterio_requisito` (`id`, `nombre`) VALUES (2, 'Tener conformado en su ente territorial el Comité Departamental, Distrital o Municipal de Discapacidad con la participación y articulación de las diferentes entidades como lo indica la ley 1145 de 2007? ');

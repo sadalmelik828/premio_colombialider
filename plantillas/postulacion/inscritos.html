@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block titulo %}Resumen de inscritos{% endblock %}
+
+{% block cuerpo %}
+<h2>Resumen de Inscritos</h2>
+{% if inscritos|length > 0 %}
+<table class="tabla" width="840" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <th>
+        <p>
+            Nombre del Gobernante
+        </p></th>
+        <th>Tipo de Administraci&oacute;n</th>
+        <th>Departamento / Municipio</th>
+        <th>Estado de Diligenciamiento</th>
+        <th>Postulaci&oacute;n cerrada</th>
+    </tr>
+    {% for i in inscritos %}
+    <tr>
+        <td>{{ i.inscrito.nombre|linebreaks }}</td>
+        <td>{{i.inscrito.tipo_gobernante.nombre }}</td>
+        <td>
+        {% if i.inscrito.tipo_gobernante.id == 1 %}
+        {{ i.inscrito.municipio.departamento.nombre }}
+        {% else %}
+        {{ i.inscrito.municipio.nombre }} ({{ i.inscrito.municipio.departamento.nombre }})
+        {% endif %}
+        </td>
+        <td>
+        {% if i.estado_diligenciamiento > 0 %}
+        Parcial
+        {% else %}
+        Completa
+        {% endif %}
+        </td>
+        <td>
+        {% if i.cerrada %}
+        <img src="/multimedia/imagenes/select.png" width="16" heigth="16" title="Ha sido cerrada." />
+        {% else %}
+        <img src="/multimedia/imagenes/error.png" width="16" heigth="16" title="A&uacute;n no ha sido cerrada." />
+        {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p align="center">
+    &bull; A&uacute;n no hay gobernadores o alcaldes inscritos.
+</p>
+{% endif %}
+{% endblock %}

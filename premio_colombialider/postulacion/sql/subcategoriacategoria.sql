@@ -1,0 +1,12 @@
+INSERT INTO `subcategoria_categoria` (`id`, `subcategoria_id`, `categoria_id`, `puntaje`) VALUES (1, 1, 1, 150);
+INSERT INTO `subcategoria_categoria` (`id`, `subcategoria_id`, `categoria_id`, `puntaje`) VALUES (2, 2, 1, 150);
+INSERT INTO `subcategoria_categoria` (`id`, `subcategoria_id`, `categoria_id`, `puntaje`) VALUES (3, 3, 1, 100);
+INSERT INTO `subcategoria_categoria` (`id`, `subcategoria_id`, `categoria_id`, `puntaje`) VALUES (4, 4, 1, 50);
+INSERT INTO `subcategoria_categoria` (`id`, `subcategoria_id`, `categoria_id`, `puntaje`) VALUES (5, 5, 1, 50);
+INSERT INTO `subcategoria_categoria` (`id`, `subcategoria_id`, `categoria_id`, `puntaje`) VALUES (6, 6, 1, 50);
+INSERT INTO `subcategoria_categoria` (`id`, `subcategoria_id`, `categoria_id`, `puntaje`) VALUES (7, 7, 1, 50);
+INSERT INTO `subcategoria_categoria` (`id`, `subcategoria_id`, `categoria_id`, `puntaje`) VALUES (8, 8, 1, 50);
+INSERT INTO `subcategoria_categoria` (`id`, `subcategoria_id`, `categoria_id`, `puntaje`) VALUES (9, 9, 2, 100);
+INSERT INTO `subcategoria_categoria` (`id`, `subcategoria_id`, `categoria_id`, `puntaje`) VALUES (10, 10, 3, 50);
+INSERT INTO `subcategoria_categoria` (`id`, `subcategoria_id`, `categoria_id`, `puntaje`) VALUES (11, 11, 4, 100);
+INSERT INTO `subcategoria_categoria` (`id`, `subcategoria_id`, `categoria_id`, `puntaje`) VALUES (12, 12, 5, 100);

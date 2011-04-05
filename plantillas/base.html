@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>{%block titulo%}{%endblock%}</title>
+        <link rel="shortcut icon" href="/multimedia/imagenes/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="/multimedia/css/estilo.css" type="text/css" media="screen" />
+        <link type="text/css" href="/multimedia/css/pepper_grinder/jquery-ui-1.8.10.custom.css" rel="stylesheet" />
+        <script type="text/javascript" src="/multimedia/js/jquery-1.5.1.min.js">
+        </script>
+        <script type="text/javascript" src="/multimedia/js/jquery-ui-1.8.10.custom.min.js">
+        </script>
+        {%block head%}{%endblock%}
+    </head>
+    <body>
+        <div id="cuerpo">
+            {% block encabezado %}
+            <div id="encabezado">
+            </div>
+            {% endblock %}
+            <div id="contenido">
+                <div id="miga_pan">
+                    {%block miga %}{% endblock %}
+                </div>
+                {%block cuerpo%}
+                {% endblock %}
+            </div>
+            {% block pie %}
+            <div id="pie">
+                <br>
+                <table id="pie_1">
+                    <tr>
+                        <td>
+                        <a href="http://www.semana.com.co" target="_blank">
+                        <img src="/multimedia/imagenes/semana_60.png" border="0" /></a></td>
+                        <td>
+                        <a href="http://www.asobancaria.com" target="_blank">
+                        <img src="/multimedia/imagenes/asobancaria_60.png" border="0" /></a></td>
+                        <td>
+                        <a href="http://www.funrestrepobarco.org.co/" target="_blank">
+                        <img src="/multimedia/imagenes/restrepo_barco_60.png" border="0" /></a></td>
+                        <td>
+                        <a href="http://www.fedesarrollo.org.co/" target="_blank">
+                        <img src="/multimedia/imagenes/fedesarrollo_60.png" border="0" /></a></td>
+                        <td>
+                        <a href="http://www.undp.org/spanish/" target="_blank">
+                        <img src="/multimedia/imagenes/pnud_60.png" border="0" /></a></td>
+                    </tr>
+                </table>
+                <table id="pie_2">
+                    <tr>
+                        <td>
+                        <a href="http://www.fescol.org.co/" target="_blank">
+                        <img src="/multimedia/imagenes/fescol_60.png" border="0" /></a></td>
+                        <td>
+                        <a href="http://www.rcnradio.com" target="_blank">
+                        <img src="/multimedia/imagenes/rcn_radio_60.png" border="0" /></a></td>
+                        <td>
+                        <a href="http://www.canalrcnmsn.com" target="_blank">
+                        <img src="/multimedia/imagenes/rcn_tv_60.png" border="0" /></a></td>
+                        <td>
+                        <a href="http://www.saldarriagaconcha.org" target="_blank">
+                        <img src="/multimedia/imagenes/saldarriaga_concha_60.png" border="0" /></a></td>
+                    </tr>
+                </table>
+            </div>
+            {% endblock %}
+        </div>
+        <!-- Start of Woopra Code -->
+        <script type="text/javascript">
+            var woo_settings = {idle_timeout:'300000', domain:'colombialider.org'};
+            var woo_actions = [{type:'pageview',url:window.location.pathname+window.location.search,title:document.title}];
+            (function() {
+                var wsc = document.createElement('script');
+                wsc.src = document.location.protocol+'//static.woopra.com/js/woopra.js';
+                wsc.type = 'text/javascript';
+                wsc.async = true;
+                var ssc = document.getElementsByTagName('script')[0];
+                ssc.parentNode.insertBefore(wsc, ssc);
+            })();
+        </script>
+        <!-- End of Woopra Code -->
+    </body>
+</html>

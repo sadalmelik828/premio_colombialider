@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block titulo %}Panel de Consultas{% endblock %}
+
+{% block head %}
+<script type="text/javascript">
+    $(document).ready( function() {
+        $(".inscritos").button({ icons: { primary: 'ui-icon-person' }, text: true });
+        $(".evaluaciones").button({ icons: { primary: 'ui-icon-calculator' }, text: true });
+        $(".pass").button({ icons: { primary: 'ui-icon-key' }, text: true });
+        $(".salir").button({ icons: { primary: 'ui-icon-power' }, text: true });
+    });
+</script>
+{% endblock %}
+
+{% block cuerpo %}
+<div align="right">
+    <a class="pass" href="/cambio_pass/">Cambiar contrase&ntilde;a</a> | <a class="salir" href="/salir/">Salir</a>
+</div>
+<h2>Consultas</h2>
+<p align="center">
+    <a class="inscritos" href="/inscritos">Resumen de Inscritos</a>
+    <a class="evaluaciones" href="">Resumen de Evaluaciones</a>
+</p>
+{% endblock %}

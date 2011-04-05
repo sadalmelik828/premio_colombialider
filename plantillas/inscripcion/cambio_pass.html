@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block titulo %}Cambio de Contrase&ntilde;a{% endblock %}
+
+{% block cuerpo %}
+<div>
+  <h2>Cambio de Contrase&ntilde;a</h2>
+  {% if formulario.errors %}
+        <p style="color: red;">Corrija error{{ formulario.errors|pluralize:"es" }} abajo.</p>
+    {% endif %}
+    <form action="" method="post" name="cambio_pass" id="cambio_pass" >
+        <table border="0" cellspacing="0" cellpadding="0">            
+            {{formulario.as_table}}
+        </table>
+        <input type="submit" value="Enviar"/>
+    </form>
+</div>
+{% endblock %}
