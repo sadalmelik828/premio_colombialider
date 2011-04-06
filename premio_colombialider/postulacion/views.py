@@ -26,56 +26,56 @@ def postulacion(request, inscrito):
         r = inlineformset_factory(Postulacion, Postulacioncriteriorequisito, form=RequisitoForm, can_delete=False, max_num=req.count())        
         ### categoria resultados ###
         # subcategoria educacion
-        edu = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=1) 
+        edu = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=1, postulacion__pk=postulacion.id) 
         e = inlineformset_factory(Postulacion, Postulacionpreguntasubcategoriacategoria, form=PreguntaForm, can_delete=False, max_num=edu.count())
         qcee = Postulacionsubcategoriacategoriacriterioevaluacion.objects.filter(postulacion_subcategoria_categoria__postulacion=postulacion, postulacion_subcategoria_categoria__subcategoria_categoria__pk=1)
         qfcee = inlineformset_factory(Postulacionsubcategoriacategoria, Postulacionsubcategoriacategoriacriterioevaluacion, form=CriterioevaluacionForm, can_delete=False, max_num=qcee.count())
         # subcategoria Mercado laboral y productividad
-        mer = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=2)
+        mer = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=2, postulacion__pk=postulacion.id)
         m = inlineformset_factory(Postulacion, Postulacionpreguntasubcategoriacategoria, form=PreguntaForm, can_delete=False, max_num=mer.count())
         qcem = Postulacionsubcategoriacategoriacriterioevaluacion.objects.filter(postulacion_subcategoria_categoria__postulacion=postulacion, postulacion_subcategoria_categoria__subcategoria_categoria__pk=2)
         qfcem = inlineformset_factory(Postulacionsubcategoriacategoria, Postulacionsubcategoriacategoriacriterioevaluacion, form=CriterioevaluacionForm, can_delete=False, max_num=qcem.count())
         # Accesibilidad
-        acc = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=3)
+        acc = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=3, postulacion__pk=postulacion.id)
         a = inlineformset_factory(Postulacion, Postulacionpreguntasubcategoriacategoria, form=PreguntaForm, can_delete=False, max_num=acc.count())
         qcea = Postulacionsubcategoriacategoriacriterioevaluacion.objects.filter(postulacion_subcategoria_categoria__postulacion=postulacion, postulacion_subcategoria_categoria__subcategoria_categoria__pk=3)
         qfcea = inlineformset_factory(Postulacionsubcategoriacategoria, Postulacionsubcategoriacategoriacriterioevaluacion, form=CriterioevaluacionForm, can_delete=False, max_num=qcea.count())
         # Acceso a la informacion
-        ac = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=4)
+        ac = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=4, postulacion__pk=postulacion.id)
         ai = inlineformset_factory(Postulacion, Postulacionpreguntasubcategoriacategoria, form=PreguntaForm, can_delete=False, max_num=ac.count())
         qcei = Postulacionsubcategoriacategoriacriterioevaluacion.objects.filter(postulacion_subcategoria_categoria__postulacion=postulacion, postulacion_subcategoria_categoria__subcategoria_categoria__pk=4)
         qfcei = inlineformset_factory(Postulacionsubcategoriacategoria, Postulacionsubcategoriacategoriacriterioevaluacion, form=CriterioevaluacionForm, can_delete=False, max_num=qcei.count())
         # Convivencia y derechos humanos
-        hum = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=5)
+        hum = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=5, postulacion__pk=postulacion.id)
         c = inlineformset_factory(Postulacion, Postulacionpreguntasubcategoriacategoria, form=PreguntaForm, can_delete=False, max_num=hum.count())
         qcec = Postulacionsubcategoriacategoriacriterioevaluacion.objects.filter(postulacion_subcategoria_categoria__postulacion=postulacion, postulacion_subcategoria_categoria__subcategoria_categoria__pk=5)
         qfcec = inlineformset_factory(Postulacionsubcategoriacategoria, Postulacionsubcategoriacategoriacriterioevaluacion, form=CriterioevaluacionForm, can_delete=False, max_num=qcec.count())
         # Cultura, recreacion y deporte
-        cul = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=6)
+        cul = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=6, postulacion__pk=postulacion.id)
         crd = inlineformset_factory(Postulacion, Postulacionpreguntasubcategoriacategoria, form=PreguntaForm, can_delete=False, max_num=cul.count())
         qced = Postulacionsubcategoriacategoriacriterioevaluacion.objects.filter(postulacion_subcategoria_categoria__postulacion=postulacion, postulacion_subcategoria_categoria__subcategoria_categoria__pk=6)
         qfced = inlineformset_factory(Postulacionsubcategoriacategoria, Postulacionsubcategoriacategoriacriterioevaluacion, form=CriterioevaluacionForm, can_delete=False, max_num=qced.count())
         # Registro de localizacion y caracterizacion de personas con discapacidad
-        loc = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=7)
+        loc = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=7, postulacion__pk=postulacion.id)
         l = inlineformset_factory(Postulacion, Postulacionpreguntasubcategoriacategoria, form=PreguntaForm, can_delete=False, max_num=loc.count())
         qcel = Postulacionsubcategoriacategoriacriterioevaluacion.objects.filter(postulacion_subcategoria_categoria__postulacion=postulacion, postulacion_subcategoria_categoria__subcategoria_categoria__pk=7)
         qfcel = inlineformset_factory(Postulacionsubcategoriacategoria, Postulacionsubcategoriacategoriacriterioevaluacion, form=CriterioevaluacionForm, can_delete=False, max_num=qcel.count())
         # Otros sectores
-        sec = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=8)
+        sec = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=8, postulacion__pk=postulacion.id)
         o = inlineformset_factory(Postulacion, Postulacionpreguntasubcategoriacategoria, form=PreguntaForm, can_delete=False, max_num=sec.count())
         qces = Postulacionsubcategoriacategoriacriterioevaluacion.objects.filter(postulacion_subcategoria_categoria__postulacion=postulacion, postulacion_subcategoria_categoria__subcategoria_categoria__pk=8)
         qfces = inlineformset_factory(Postulacionsubcategoriacategoria, Postulacionsubcategoriacategoriacriterioevaluacion, form=CriterioevaluacionForm, can_delete=False, max_num=qces.count())
         ### Categoria gestion integral ###
-        ges = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=9)
+        ges = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=9, postulacion__pk=postulacion.id)
         g = inlineformset_factory(Postulacion, Postulacionpreguntasubcategoriacategoria, form=PreguntaForm, can_delete=False, max_num=ges.count())
         ### Categoria replicabilidad ###
-        rep = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=10)
+        rep = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=10, postulacion__pk=postulacion.id)
         d = inlineformset_factory(Postulacion, Postulacionpreguntasubcategoriacategoria, form=PreguntaForm, can_delete=False, max_num=rep.count())
         ### Categoria Innovacion ###
-        inn = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=11)
+        inn = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=11, postulacion__pk=postulacion.id)
         i = inlineformset_factory(Postulacion, Postulacionpreguntasubcategoriacategoria, form=PreguntaForm, can_delete=False, max_num=inn.count())
         ### Categoria Participacion ###
-        part = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=12)
+        part = Postulacionpreguntasubcategoriacategoria.objects.filter(pregunta_subcategoria_categoria__subcategoria_categoria__pk=12, postulacion__pk=postulacion.id)
         t = inlineformset_factory(Postulacion, Postulacionpreguntasubcategoriacategoria, form=PreguntaForm, can_delete=False, max_num=part.count())
         if request.method == "POST":
             p = PostulacionForm(request.POST, request.FILES, instance=postulacion)            

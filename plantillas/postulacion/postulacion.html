@@ -12,6 +12,7 @@
       $("#acordeon").accordion({ collapsible: true });
         $("#tabs_categorias, #tabs_resultados").tabs();
         $(".pass").button({ icons: { primary: 'ui-icon-key' }, text: true });
+        $(".bases").button({icons: {primary: 'ui-icon-document'}, text: true});
         $(".salir").button({ icons: { primary: 'ui-icon-power' }, text: true });
         $('input:file').MultiFile({
             accept: 'pdf', max: 1, STRING: {
@@ -34,7 +35,7 @@
 <div class="msg">{{ msg }}</div>
 <h1>Postulaci&oacute;n</h1>
 <div align="right">
-    <a class="pass" href="/cambio_pass/">Cambiar contrase&ntilde;a</a> | <a class="salir" href="/salir/">Salir</a>
+    <a class="pass" href="/cambio_pass/">Cambiar contrase&ntilde;a</a> | <a class="bases" href="/multimedia/documentos/bases_alcaldes_y_gobernantes_incluyentes.pdf">Bases del premio</a> | <a class="salir" href="/salir/">Salir</a>
 </div>
 <!--<h3>Bases de los criterios de evaluaci&oacute;n</h3>-->
 <div id="bases">
@@ -549,16 +550,16 @@
         <div id="replicabilidad">
             <h4>Replicabilidad</h4>
             {{ replicabilidad.management_form }}
-            {% for d in replicabilidad.forms %}
+            {% for re in replicabilidad.forms %}
             <p>
-                {{ d.id }}
-                {{ d.postulacion }}
+                {{ re.id }}
+                {{ re.postulacion }}
                 <p id="preguntas">{% cycle rep.0 rep.1 rep.2 rep.3 rep.4 rep.5 rep.6 rep.7 %}</p>
-                {{ d.respuesta }}
+                {{ re.respuesta }}
                 <br>
-                <p>{{ d.anexo }}</p>
-                <i>&bull; {{ d.anexo.help_text }}</i>
-                {{ d.anexo.errors }}
+                <p>{{ re.anexo }}</p>
+                <i>&bull; {{ re.anexo.help_text }}</i>
+                {{ re.anexo.errors }}
                 <br>
             </p>
             <hr>

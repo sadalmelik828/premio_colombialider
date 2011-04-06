@@ -1,6 +1,8 @@
 $(document).ready(function(){
 	
 	$("#id_postulacion").submit(function(){
+		// mensaje que indica guardando
+		$(".msg").text("Guardando...").css('display', 'inline');
 		// variable que verifica si esta cerrando la postulacion
 		var cerrada = $("#id_cerrada").is(":checked");
 		// Verificacion de las respuestas obligatorias si cierra la postulacion
@@ -24,6 +26,7 @@ $(document).ready(function(){
 			if(vacios.length > 0){
 				if(confirm("Esta cerrando la postulaci\xf3n, pero existen respuestas que no ha diligenciado en las secciones de:\n"+vacios.join(", ").toUpperCase()+"\nEsta seguro de querer cerrar la postulaci\xf3n sin responder estos campos ?") == false){
 					return false;
+					$(".msg > *").css('display', 'none').remove();
 				}
 			}
 			// matriz que contiene los id de los input file obligatorios
@@ -44,6 +47,7 @@ $(document).ready(function(){
 			if(af.length > 0){
 				if(confirm("Esta cerrando la postulaci\xf3n, pero no ha anexado algunos soportes obligatorios en las secciones de:\n"+af.join(", ").toUpperCase()+"\nEsta seguro de querer cerrar la postulaci\xf3n sin anexar estos soportes ?") == false){
 					return false;
+					$(".msg > *").css('display', 'none').remove();
 				}
 			}
 		}
